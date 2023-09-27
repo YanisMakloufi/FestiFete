@@ -2,9 +2,8 @@
 Projet universitaire de 3e année BUT Informatique option RACDV (Réalisation d'Application : Conception, Développement, Validation)
 
 ## Technologies utilisées :
-- PHP v ?.?.?
-- Symfony (?)
-- Javascript v(?)
+- PHP v8.1.10
+- Symfony v6.3.4
 
 ## Équipe :
 - Loïs Odiardo
