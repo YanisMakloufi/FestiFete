@@ -1,16 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
+        <link rel="icon" href="flaticon.png">
+        <link rel="stylesheet" href="{{ asset("css/global.css") }}">
+        {% block stylesheets %}{% endblock %}
 
-        {% block javascripts %}
-        {% endblock %}
+        {% block javascripts %}{% endblock %}
     </head>
+
     <body>
-        {% block body %}{% endblock %}
+        <header>
+            <h1>PROJET 4</h1>
+            <nav>
+                <a href="">lien 1</a>
+                <a href="">lien 1</a>
+                <a href="">lien 1</a>
+            </nav>
+        </header>
+
+        <main>
+            {% block body %}{% endblock %}
+        </main>
+
+        <footer>
+            FOOTER<br>
+            Projet 4, 3e année de BUT Informatique Option RACDV<br>
+            Loïs ODIARDO Yanis MAKLOUFI
+        </footer>
     </body>
 </html>

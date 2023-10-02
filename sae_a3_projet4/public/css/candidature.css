@@ -1,0 +1,65 @@
+h1 {
+    text-align: center;
+}
+
+form{
+    background-color: darkslateblue;
+    padding: 1%;
+    margin: 3%;
+}
+
+#info-festival{
+    background-color: indianred;
+    padding: 0 3%;
+    margin: 5% 0;
+}
+
+#info-festival > header {
+    display: flex;
+}
+
+#info-festival > header > h3:nth-child(even){
+     text-align: right;
+}
+
+#info-festival > header > h3 {
+     width:50%;
+     text-align: left;
+}
+
+#info-festival > section {
+    background-color: cornflowerblue;
+    padding: 1%;
+    margin: 0 2%;
+}
+
+#candidature {
+    display: flex;
+    justify-content: space-between;
+}
+
+#candidature aside{
+    padding: 1%;
+    width: 45%;
+    background-color: darkviolet;
+}
+
+#candidature section{
+    display: flex;
+    justify-content: space-between;
+    margin: 3%;
+    padding: 1%;
+    background-color: violet;
+}
+
+#candidature section > input {
+    margin: 0;
+}
+
+#submit {
+    display: block;
+    margin: 5% auto;
+    background-color: gold;
+    border: none;
+    padding: 1%;
+}

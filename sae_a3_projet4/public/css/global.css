@@ -1,0 +1,10 @@
+body{
+    margin: 0;
+}
+
+body > header > nav{
+    width: 30%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+}
