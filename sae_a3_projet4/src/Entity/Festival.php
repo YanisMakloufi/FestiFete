@@ -14,9 +14,6 @@ class Festival
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    private ?int $identifiant = null;
-
     #[ORM\Column(length: 255)]
     private ?string $nom = null;
 
@@ -26,11 +23,12 @@ class Festival
     #[ORM\Column]
     private ?bool $validation = null;
 
-    #[ORM\Column(type: Types::ARRAY)]
-    private array $lieux = [];
+    //#[ORM\Column(type: Types::ARRAY)]
+    //private array $lieux = [];
 
-    #[ORM\Column(type: Types::ARRAY)]
-    private array $postes = [];
+    //#[ORM\Column(type: Types::ARRAY)]
+    #[ORM\OneToMany(mappedBy: Festival::class, targetEntity: Poste::class)]
+    private $postes;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $debut = null;
@@ -41,18 +39,6 @@ class Festival
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getIdentifiant(): ?int
-    {
-        return $this->identifiant;
-    }
-
-    public function setIdentifiant(int $identifiant): static
-    {
-        $this->identifiant = $identifiant;
-
-        return $this;
     }
 
     public function getNom(): ?string

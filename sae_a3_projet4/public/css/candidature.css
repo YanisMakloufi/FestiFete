@@ -56,6 +56,32 @@ form{
     margin: 0;
 }
 
+.poste {
+    position: relative;
+}
+
+.poste legend {
+    display: none;
+    position: absolute;
+    top:100%;
+    right: 0;
+    left: 0;
+    z-index: 1;
+    background-color: mediumvioletred;
+    padding: 1%;
+}
+
+#desc {
+    resize: vertical;
+    width: 90%;
+    max-height: 400px;
+    min-height: 50%;
+}
+
+.poste:hover legend{
+    display: block;
+}
+
 #submit {
     display: block;
     margin: 5% auto;
