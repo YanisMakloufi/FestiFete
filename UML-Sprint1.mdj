@@ -12493,81 +12493,13 @@
 											"height": 13,
 											"text": "+estValider()",
 											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGK8XU1EO3jEsE=",
-											"_parent": {
-												"$ref": "AAAAAAGK8XTMVe2UgOg="
-											},
-											"model": {
-												"$ref": "AAAAAAGK8XU1Cu3gZGw="
-											},
-											"font": "Arial;13;0",
-											"left": 381,
-											"top": 550,
-											"width": 111.66162109375,
-											"height": 13,
-											"text": "+GetPostes()",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGK8XU7Ge3pwW8=",
-											"_parent": {
-												"$ref": "AAAAAAGK8XTMVe2UgOg="
-											},
-											"model": {
-												"$ref": "AAAAAAGK8XU7Eu3mQyk="
-											},
-											"font": "Arial;13;0",
-											"left": 381,
-											"top": 565,
-											"width": 111.66162109375,
-											"height": 13,
-											"text": "+GetLieux()",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGK8XVBH+3vP34=",
-											"_parent": {
-												"$ref": "AAAAAAGK8XTMVe2UgOg="
-											},
-											"model": {
-												"$ref": "AAAAAAGK8XVBGe3sLpo="
-											},
-											"font": "Arial;13;0",
-											"left": 381,
-											"top": 580,
-											"width": 111.66162109375,
-											"height": 13,
-											"text": "+GetNom()",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLOperationView",
-											"_id": "AAAAAAGK8XVJWO311Ao=",
-											"_parent": {
-												"$ref": "AAAAAAGK8XTMVe2UgOg="
-											},
-											"model": {
-												"$ref": "AAAAAAGK8XVJUu3ynho="
-											},
-											"font": "Arial;13;0",
-											"left": 381,
-											"top": 595,
-											"width": 111.66162109375,
-											"height": 13,
-											"text": "+GetDesc()",
-											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 376,
 									"top": 530,
 									"width": 121.66162109375,
-									"height": 83
+									"height": 23
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -12607,7 +12539,7 @@
 							"left": 376,
 							"top": 392,
 							"width": 121.66162109375,
-							"height": 221,
+							"height": 161,
 							"nameCompartment": {
 								"$ref": "AAAAAAGK8XTMVe2Oor0="
 							},
@@ -14032,38 +13964,6 @@
 								"$ref": "AAAAAAGK8XTMVO2LJj0="
 							},
 							"name": "estValider"
-						},
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAGK8XU1Cu3gZGw=",
-							"_parent": {
-								"$ref": "AAAAAAGK8XTMVO2LJj0="
-							},
-							"name": "GetPostes"
-						},
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAGK8XU7Eu3mQyk=",
-							"_parent": {
-								"$ref": "AAAAAAGK8XTMVO2LJj0="
-							},
-							"name": "GetLieux"
-						},
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAGK8XVBGe3sLpo=",
-							"_parent": {
-								"$ref": "AAAAAAGK8XTMVO2LJj0="
-							},
-							"name": "GetNom"
-						},
-						{
-							"_type": "UMLOperation",
-							"_id": "AAAAAAGK8XVJUu3ynho=",
-							"_parent": {
-								"$ref": "AAAAAAGK8XTMVO2LJj0="
-							},
-							"name": "GetDesc"
 						}
 					]
 				},
