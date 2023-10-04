@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\FestivalRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -27,14 +29,23 @@ class Festival
     //private array $lieux = [];
 
     //#[ORM\Column(type: Types::ARRAY)]
-    #[ORM\OneToMany(mappedBy: Festival::class, targetEntity: Poste::class)]
-    private $postes;
+    #[ORM\OneToMany(mappedBy: 'festival', targetEntity: Poste::class, orphanRemoval: true)]
+    private Collection $postes;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $debut = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $fin = null;
+
+    #[ORM\OneToMany(mappedBy: 'festival', targetEntity: Candidature::class, orphanRemoval: true)]
+    private Collection $candidatures;
+
+    public function __construct()
+    {
+        $this->candidatures = new ArrayCollection();
+        $this->postes = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -94,14 +105,29 @@ class Festival
         return $this;
     }
 
-    public function getPostes(): array
+    public function getPostes(): Collection
     {
         return $this->postes;
     }
 
-    public function setPostes(array $postes): static
+    public function addPoste(Poste $poste): static
     {
-        $this->postes = $postes;
+        if (!$this->postes->contains($poste)) {
+            $this->postes->add($poste);
+            $poste->setFestival($this);
+        }
+
+        return $this;
+    }
+
+    public function removePoste(Poste $poste): static
+    {
+        if ($this->postes->removeElement($poste)) {
+            // set the owning side to null (unless already changed)
+            if ($poste->getFestival() === $this) {
+                $poste->setFestival(null);
+            }
+        }
 
         return $this;
     }
@@ -126,6 +152,36 @@ class Festival
     public function setFin(\DateTimeInterface $fin): static
     {
         $this->fin = $fin;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Candidature>
+     */
+    public function getCandidatures(): Collection
+    {
+        return $this->candidatures;
+    }
+
+    public function addCandidature(Candidature $candidature): static
+    {
+        if (!$this->candidatures->contains($candidature)) {
+            $this->candidatures->add($candidature);
+            $candidature->setFestival($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCandidature(Candidature $candidature): static
+    {
+        if ($this->candidatures->removeElement($candidature)) {
+            // set the owning side to null (unless already changed)
+            if ($candidature->getFestival() === $this) {
+                $candidature->setFestival(null);
+            }
+        }
 
         return $this;
     }

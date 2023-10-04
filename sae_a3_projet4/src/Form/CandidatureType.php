@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Candidature;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,6 +20,10 @@ class CandidatureType extends AbstractType
                     'minlength' => 50,
                     'maxlength' => 600
                 ]
+            ])
+            ->add('preferences', CollectionType::class, [
+                'entry_type' => PreferenceType::class,
+                'entry_options' => ['label' => false],
             ])
             ->add('envoyer', SubmitType::class);
     }

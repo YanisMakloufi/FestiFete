@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="flaticon.png">
+        <link rel="icon" href="{{ asset("flaticon.png") }}">
         <link rel="stylesheet" href="{{ asset("css/global.css") }}">
         {% block stylesheets %}{% endblock %}
 
@@ -14,9 +14,9 @@
         <header>
             <h1>PROJET 4</h1>
             <nav>
-                <a href="">lien 1</a>
-                <a href="">lien 1</a>
-                <a href="">lien 1</a>
+                <a href="{{ path("candidature", {idFestival: 1}) }}">Candidater</a>
+                <a href="{{ path("candidature", {idFestival: 1}) }}">Proposer son festival</a>
+                <a href="{{ path("candidature", {idFestival: 1}) }}">Liste des festivals en attente</a>
             </nav>
         </header>
 

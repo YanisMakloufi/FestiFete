@@ -10,7 +10,7 @@ form{
 
 #info-festival{
     background-color: indianred;
-    padding: 0 3%;
+    padding: 2%;
     margin: 5% 0;
 }
 
@@ -33,9 +33,28 @@ form{
     margin: 0 2%;
 }
 
-#candidature {
+#creneau {
+    background-color: cadetblue;
+    padding: 1%;
+}
+
+#creneau fieldset{
+    display: flex;
+    flex-direction: column;
+}
+
+#creneau section{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#poste {
     display: flex;
     justify-content: space-between;
+    background-color: darkseagreen;
+    margin: 3% 0;
+    padding: 1%;
+    align-items: stretch;
 }
 
 #candidature aside{
@@ -44,20 +63,24 @@ form{
     background-color: darkviolet;
 }
 
-#candidature section{
+#candidature section > input {
+    margin: 0;
+}
+
+#desc {
+    resize: none;
+    width: 90%;
+    max-height: 400px;
+    min-height: 50%;
+}
+
+.poste {
+    position: relative;
     display: flex;
     justify-content: space-between;
     margin: 3%;
     padding: 1%;
     background-color: violet;
-}
-
-#candidature section > input {
-    margin: 0;
-}
-
-.poste {
-    position: relative;
 }
 
 .poste legend {
@@ -69,13 +92,6 @@ form{
     z-index: 1;
     background-color: mediumvioletred;
     padding: 1%;
-}
-
-#desc {
-    resize: vertical;
-    width: 90%;
-    max-height: 400px;
-    min-height: 50%;
 }
 
 .poste:hover legend{
