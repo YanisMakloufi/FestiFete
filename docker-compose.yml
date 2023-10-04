@@ -1,0 +1,41 @@
+version: '3'
+
+networks:
+  db:
+
+services:
+  mysql:
+    image: 'mysql:latest'
+    environment:
+      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_DATABASE: 'projet4'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./data/db:/var/lib/mysql
+    networks:
+      - db
+  symfony:
+    image: 'bitnami/symfony:latest'
+    ports: 
+      - '8000:8000'
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+      - SYMFONY_PROJECT_SKELETON=symfony/skeleton
+    volumes:
+      - './sae_a3_projet4:/app'
+    networks:
+      - db
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: mysql
+    depends_on:
+      - mysql
+    networks:
+      - db
