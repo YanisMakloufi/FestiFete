@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FestivalController!{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("css/validation.css") }}">
+{% endblock %}
+
+{% block body %}
+
+{% for festival in liste %}
+    <div id="festival">
+        <p>
+        <span class="title">{{ festival.getNom() }}</span>
+            <input id="button" type="button" value="valider" onclick="">
+        </p>
+        <p>
+        {{ festival.getDescription() }}
+        <input id="button" type="button" value="refuser" onclick="">
+        </p>
+    </div>
+{% endfor %}
+
+{% endblock %}

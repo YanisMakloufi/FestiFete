@@ -1,0 +1,21 @@
+h1 {
+    text-align: center;
+}
+
+#festival{
+    background-color: indianred;
+    padding: 1%;
+    margin: 0 2%;
+}
+
+.title{
+    font-weight: bold;
+}
+p{
+    display: flex;
+    align-items: center;
+}
+
+#button{
+margin-left: auto;
+}

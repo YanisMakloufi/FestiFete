@@ -21,6 +21,9 @@ class FestivalRepository extends ServiceEntityRepository
         parent::__construct($registry, Festival::class);
     }
 
+    public function findAllNonVerifie() : array {
+        return $this->findBy(["validation"=>"false"],[]);
+    }
 //    /**
 //     * @return Festival[] Returns an array of Festival objects
 //     */
