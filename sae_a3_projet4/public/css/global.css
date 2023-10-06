@@ -3,8 +3,12 @@ body{
 }
 
 body > header > nav{
-    width: 30%;
+    width: 40%;
     margin: auto;
     display: flex;
-    justify-content: space-between;
+}
+
+body > header > nav > a{
+    text-align: center;
+    width: 33%;
 }

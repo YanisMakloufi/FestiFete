@@ -25,21 +25,19 @@ class Festival
     #[ORM\Column]
     private ?bool $validation = null;
 
-    //#[ORM\Column(type: Types::ARRAY)]
-    //private array $lieux = [];
+    #[ORM\Column(type: Types::TEXT)]
+    private ?string $lieu = null;
 
     //#[ORM\Column(type: Types::ARRAY)]
     #[ORM\OneToMany(mappedBy: 'festival', targetEntity: Poste::class, orphanRemoval: true)]
     private Collection $postes;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $debut = null;
-
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $fin = null;
-
     #[ORM\OneToMany(mappedBy: 'festival', targetEntity: Candidature::class, orphanRemoval: true)]
     private Collection $candidatures;
+
+    //#[ORM\OneToOne(cascade: ['persist', 'remove'])]
+    //#[ORM\JoinColumn(nullable: false)]
+    //private ?Creneau $creneau = null;
 
     public function __construct()
     {
@@ -93,14 +91,14 @@ class Festival
         $this->validation = true;
     }
 
-    public function getLieux(): array
+    public function getLieu(): string
     {
-        return $this->lieux;
+        return $this->lieu;
     }
 
-    public function setLieux(array $lieux): static
+    public function setLieu(string $lieu): static
     {
-        $this->lieux = $lieux;
+        $this->lieu = $lieu;
 
         return $this;
     }
@@ -182,6 +180,18 @@ class Festival
                 $candidature->setFestival(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreneau(): ?\DateTimeInterface
+    {
+        return $this->creneau;
+    }
+
+    public function setCreneau(\DateTimeInterface $creneau): static
+    {
+        $this->creneau = $creneau;
 
         return $this;
     }

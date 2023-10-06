@@ -7,6 +7,10 @@ use App\Repository\CandidatureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\InverseJoinColumn;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
 
 #[ORM\Entity(repositoryClass: CandidatureRepository::class)]
 class Candidature
@@ -31,9 +35,15 @@ class Candidature
     #[ORM\JoinColumn(nullable: false)]
     private ?Festival $festival = null;
 
+    #[JoinTable(name: 'Ouvert')]
+    #[JoinColumn(name: 'idCandidature', referencedColumnName: 'id')]
+    #[InverseJoinColumn(name: 'idCreneau', referencedColumnName: 'id')]
+    #[ManyToMany(targetEntity: 'Creneau', cascade: ["persist"])]
+    private Collection $disponibilites;
     public function __construct()
     {
         $this->preferences = new ArrayCollection();
+        $this->disponibilites = new ArrayCollection();
     }
 
 
@@ -104,6 +114,36 @@ class Candidature
     public function setFestival(?Festival $festival): static
     {
         $this->festival = $festival;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Creneau>
+     */
+    public function getDisponibilites(): Collection
+    {
+        return $this->disponibilites;
+    }
+
+    public function addDisponibilite(Creneau $disponibilite): static
+    {
+        if (!$this->disponibilites->contains($disponibilite)) {
+            $this->disponibilites->add($disponibilite);
+            $disponibilite->setCandidature($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDisponibilite(Creneau $disponibilite): static
+    {
+        if ($this->disponibilites->removeElement($disponibilite)) {
+            // set the owning side to null (unless already changed)
+            if ($disponibilite->getCandidature() === $this) {
+                $disponibilite->setCandidature(null);
+            }
+        }
 
         return $this;
     }

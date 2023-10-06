@@ -10,7 +10,7 @@ form{
 
 #info-festival{
     background-color: indianred;
-    padding: 2%;
+    padding: 1%;
     margin: 5% 0;
 }
 
@@ -31,6 +31,12 @@ form{
     background-color: cornflowerblue;
     padding: 1%;
     margin: 0 2%;
+}
+
+#profil {
+    background-color: lightgoldenrodyellow;
+    padding: 1%;
+    margin: 2% 0;
 }
 
 #creneau {
@@ -63,7 +69,7 @@ form{
     background-color: darkviolet;
 }
 
-#candidature section > input {
+#candidature section input {
     margin: 0;
 }
 
@@ -104,4 +110,5 @@ form{
     background-color: gold;
     border: none;
     padding: 1%;
+    cursor: pointer;
 }

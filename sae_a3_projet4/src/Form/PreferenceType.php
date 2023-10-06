@@ -2,11 +2,8 @@
 
 namespace App\Form;
 
-use App\Entity\Poste;
 use App\Entity\Preference;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -16,7 +13,16 @@ class PreferenceType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nbPreference', IntegerType::class);
+            ->add('nbPreference', IntegerType::class, [
+                'required' => false,
+                'error_bubbling' => true,
+                'label' => false,
+                'attr' => [
+                    'min' => 1,
+                    'max' => 3,
+                    'value' => 1
+                ]
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

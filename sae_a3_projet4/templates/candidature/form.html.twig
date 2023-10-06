@@ -10,7 +10,7 @@
     <article id="info-festival">
         <header>
             <h3>{{ festival.getNom() }}</h3>
-            <h3>Lieu festival</h3>
+            <h3>{{ festival.getLieu() }}</h3>
         </header>
         <section>
             Description :
@@ -28,28 +28,23 @@
     {{ form_start(formulaire, {'attr' : {'id' : 'formulaire', 'class' : 'Candidature'}}) }}
         <h1>CANDIDATURE</h1>
         <article id="candidature">
+            <section id="profil">
+                <h3>{{ formulaire.vars.value.utilisateur.nom }}</h3>
+                <h3>{{ formulaire.vars.value.utilisateur.prenom }}</h3>
+            </section>
             <section id="creneau">
                 <h3>Horaire de disponibilité :</h3>
-                <section>
-                    <fieldset>
-                        <label for="start">Horaire de début</label>
-                        <input type="datetime-local" id="start" name="trip-start" value="2023-07-22" min="2023-10-04" max="2018-12-31">
-                        <label for="end">Horaire de fin</label>
-                        <input type="datetime-local" id="end" name="trip-start" value="2023-07-22" min="2023-10-04" max="2018-12-31">
-                    </fieldset>
-                    <fieldset>
-                        <label for="start">Horaire de début</label>
-                        <input type="datetime-local" id="start" name="trip-start" value="2023-07-22" min="2023-10-04" max="2018-12-31">
-                        <label for="end">Horaire de fin</label>
-                        <input type="datetime-local" id="end" name="trip-start" value="2023-07-22" min="2023-10-04" max="2018-12-31">
-                    </fieldset>
-                    <fieldset>
-                        <label for="start">Horaire de début</label>
-                        <input type="datetime-local" id="start" name="trip-start" value="2023-07-22" min="2023-10-04" max="2018-12-31">
-                        <label for="end">Horaire de fin</label>
-                        <input type="datetime-local" id="end" name="trip-start" value="2023-07-22" min="2023-10-04" max="2018-12-31">
-                    </fieldset>
-                </section>
+                <button type="button" class="add_item_link" data-collection-holder-class="disponibilites">+</button>
+                <section id="disponibilites"
+                        data-index="{{ formulaire.disponibilites|length > 0 ? formulaire.disponibilites|last.vars.name + 1 : 0 }}"
+                        data-prototype="{{ form_widget(formulaire.disponibilites.vars.prototype)|e('html_attr') }}">
+                        <!--<fieldset>
+                            <label for="start">Horaire de début</label>
+                            <input type="datetime-local" id="start" name="trip-start" value="2023-07-22" min="2023-10-04" max="2018-12-31">
+                            <label for="end">Horaire de fin</label>
+                            <input type="datetime-local" id="end" name="trip-start" value="2023-07-22" min="2023-10-04" max="2018-12-31">
+                        </fieldset>-->
+                    </section>
             </section>
             <section id="poste">
                 <aside>
@@ -65,14 +60,49 @@
                             <legend>{{ pref.vars.value.poste.description }}</legend>
                         </section>
                     {% endfor %}
-
-                    <!--<section>
-                        <label for="poste1">Poste 1</label>
-                        <input id="poste1" type="number" min="1" max="3">
-                    </section>-->
                 </aside>
             </section>
         </article>
+
+    <script>
+        const addTagFormDeleteLink = (item) => {
+            const removeFormButton = document.createElement('button');
+            removeFormButton.innerText = '❌';
+
+            item.append(removeFormButton);
+
+            removeFormButton.addEventListener('click', (e) => {
+                if(creneaux.dataset.index > 1){
+                    e.preventDefault();
+                    creneaux.dataset.index--;
+                    item.remove();
+                }
+            });
+        }
+
+        const addFormToCollection = () => {
+            const item = document.createElement('fieldset');
+
+            item.innerHTML = creneaux
+                .dataset
+                .prototype
+                .replace(
+                    /__name__/g,
+                    creneaux.dataset.index
+                );
+
+            creneaux.appendChild(item);
+
+            creneaux.dataset.index++;
+            addTagFormDeleteLink(item);
+        };
+
+        document.querySelector('.add_item_link').addEventListener("click", addFormToCollection);
+
+        const creneaux = document.querySelector('#disponibilites')
+        addFormToCollection();
+
+    </script>
     {{ form_widget(formulaire.envoyer, {'id': "submit", 'label' : "Envoyer"}) }}
     {{ form_rest(formulaire) }}
     {{ form_end(formulaire) }}

@@ -32,6 +32,8 @@ class CandidatureController extends AbstractController
             $candidature->addPreference($t);
         }
 
+        $candidature->setUtilisateur($utilisateur);
+
         $form = $this->createForm(CandidatureType::class, $candidature, [
             'method' => 'POST',
             'action' => $this->generateURL('candidature', ['idFestival' => $idFestival])
@@ -41,7 +43,6 @@ class CandidatureController extends AbstractController
         if($form->isSubmitted() && $form->isValid()) {
             // À ce stade, le formulaire et ses données sont valides
             // L'objet "Exemple" a été mis à jour avec les données, il ne reste plus qu'à le sauvegarder
-            $candidature->setUtilisateur($utilisateur);
             $candidature->setFestival($festival);
 
             $entityManager->persist($candidature);
@@ -54,7 +55,6 @@ class CandidatureController extends AbstractController
         return $this->render('candidature/form.html.twig', [
             'controller_name' => 'CandidatureController',
             'formulaire' => $form,
-            'festival' => $festival,
-            'postes' => $postes]);
+            'festival' => $festival]);
     }
 }
