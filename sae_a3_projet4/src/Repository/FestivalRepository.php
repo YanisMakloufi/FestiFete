@@ -22,7 +22,7 @@ class FestivalRepository extends ServiceEntityRepository
     }
 
     public function findAllNonVerifie() : array {
-        return $this->findBy(["validation"=>"false"],[]);
+        return $this->findBy(["validation"=>"0"]);
     }
 //    /**
 //     * @return Festival[] Returns an array of Festival objects

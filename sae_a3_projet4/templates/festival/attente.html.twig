@@ -1,24 +1,76 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FestivalController!{% endblock %}
+{% block title %}Festival en attente{% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset("css/validation.css") }}">
 {% endblock %}
 
 {% block body %}
+    <h1>FESTIVALS EN ATTENTE</h1>
+    <article>
+        {% for festival in festivals %}
+            <section class="festival">
+                <header>
+                    <div>
+                        <h2 class="title">{{ festival.getNom() }}</h2>
+                        <span class="title">{{ festival.getLieu() }}</span>
+                    </div>
+                    <fieldset>
+                        <input id="button" class="accepter" data-festival-id="{{ festival.id }}" type="button" value="✔️">
+                        <input id="button" class="refuser" data-festival-id="{{ festival.id }}" type="button" value="❌">
+                    </fieldset>
+                </header>
+                <p>
+                    {{ festival.getDescription() }}
+                </p>
+                <p>
+                    Ouvert du ??? au ???
+                </p>
+            </section>
+        {% endfor %}
+    </article>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script defer>
 
-{% for festival in liste %}
-    <div id="festival">
-        <p>
-        <span class="title">{{ festival.getNom() }}</span>
-            <input id="button" type="button" value="valider" onclick="">
-        </p>
-        <p>
-        {{ festival.getDescription() }}
-        <input id="button" type="button" value="refuser" onclick="">
-        </p>
-    </div>
-{% endfor %}
+        function accepterFestival(event) {
+            let button = event.target;
+            let festival = button.closest(".festival");
+            festival.remove()
+            let xhr = new XMLHttpRequest();
 
+            let URL = Routing.generate('accepterFestival', {"id": button.dataset.festivalId});
+
+            xhr.open("POST", URL, true);
+            xhr.onload = function () {
+                //xhr.status permet d'accèder au code de réponse HTTP (200, 204, 403, 404, etc...)
+            };
+            xhr.send(null);
+        }
+
+        function refuserFestival(event) {
+            let button = event.target;
+            let festival = button.closest(".festival");
+            festival.remove()
+            let xhr = new XMLHttpRequest();
+
+            let URL = Routing.generate('refuserFestival', {"id": button.dataset.festivalId});
+
+            xhr.open("DELETE", URL, true);
+            xhr.onload = function () {
+                //xhr.status permet d'accèder au code de réponse HTTP (200, 204, 403, 404, etc...)
+            };
+            xhr.send(null);
+        }
+
+        let boutonsRefuser = document.getElementsByClassName("refuser");
+        let boutonsAccepter = document.getElementsByClassName("accepter");
+        Array.from(boutonsRefuser).forEach(function (button) {
+            button.addEventListener("click", refuserFestival);
+        });
+        Array.from(boutonsAccepter).forEach(function (button) {
+            button.addEventListener("click", accepterFestival);
+        });
+    </script>
 {% endblock %}

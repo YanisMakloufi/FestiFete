@@ -2,20 +2,30 @@ h1 {
     text-align: center;
 }
 
-#festival{
+.festival{
     background-color: indianred;
     padding: 1%;
-    margin: 0 2%;
+    margin: 2%;
+}
+
+.festival > header{
+    display: flex;
+    justify-content: space-between;
+}
+
+fieldset{
+    height: fit-content;
 }
 
 .title{
     font-weight: bold;
 }
+
 p{
     display: flex;
     align-items: center;
 }
 
 #button{
-margin-left: auto;
+    margin-left: auto;
 }

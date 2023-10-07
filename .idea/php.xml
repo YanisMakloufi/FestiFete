@@ -139,6 +139,8 @@
       <path value="$PROJECT_DIR$/sae_a3_projet4/vendor/doctrine/orm" />
       <path value="$PROJECT_DIR$/sae_a3_projet4/vendor/doctrine/persistence" />
       <path value="$PROJECT_DIR$/sae_a3_projet4/vendor/doctrine/sql-formatter" />
+      <path value="$PROJECT_DIR$/sae_a3_projet4/vendor/willdurand/jsonp-callback-validator" />
+      <path value="$PROJECT_DIR$/sae_a3_projet4/vendor/friendsofsymfony/jsrouting-bundle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.1" />
