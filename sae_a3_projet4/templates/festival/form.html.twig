@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Festival{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset("css/festival.css") }}">
+{% endblock %}
+
+{% block body %}
+    {{ form_start(formulaire, {'attr' : {'id' : 'formulaire', 'class' : 'Candidature'}}) }}
+    <h1>CREER VOTRE FESTIVAL</h1>
+{% endblock %}

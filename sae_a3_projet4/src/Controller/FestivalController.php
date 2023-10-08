@@ -2,8 +2,11 @@
 
 namespace App\Controller;
 
+use App\Entity\Festival;
 use App\Form\CandidatureType;
+use App\Form\FestivalType;
 use App\Repository\FestivalRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,5 +50,26 @@ class FestivalController extends AbstractController
         $entityManager->flush();
 
         return new JsonResponse(null, '204');
+    }
+
+    #[Route('/festival/creation', name: 'Creation d un festival')]
+    public function creerFestival(Request $request,EntityManager $entityManager):Response
+    {
+        $festival = new Festival();
+        $form = $this->createForm(FestivalType::class,$festival,[
+            'method'=>'POST',
+            'action'=>$this->generateUrl('festivals_en_attente')
+        ]);
+
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($festival);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('festival_en_attente');
+        }
+        return $this->render('festival/form.html.twig', [
+            'controller_name' => 'FestivalController',
+            'formulaire' => $form]);
     }
 }
