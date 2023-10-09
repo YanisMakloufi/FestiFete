@@ -4,11 +4,10 @@ namespace App\Controller;
 
 use App\Entity\Festival;
 use App\Entity\Poste;
-use App\Form\CandidatureType;
+use Symfony\Component\HttpFoundation\RequestStack;
 use App\Form\FestivalType;
 use App\Repository\FestivalRepository;
 use App\Service\FestivalManager;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
