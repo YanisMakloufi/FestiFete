@@ -2,7 +2,6 @@
 
 namespace App\Entity;
 
-use App\Form\CandidatureType;
 use App\Repository\CandidatureRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -38,7 +37,7 @@ class Candidature
     #[JoinTable(name: 'Disponibilite')]
     #[JoinColumn(name: 'idCandidature', referencedColumnName: 'id')]
     #[InverseJoinColumn(name: 'idCreneau', referencedColumnName: 'id')]
-    #[ManyToMany(targetEntity: 'Creneau', orphanRemoval: true)]
+    #[ManyToMany(targetEntity: 'Creneau', orphanRemoval: true, cascade: ['persist'])]
     private Collection $disponibilites;
     public function __construct()
     {

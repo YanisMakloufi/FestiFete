@@ -64,8 +64,8 @@ class CandidatureManager implements CandidatureManagerInterface{
         foreach($disponibilites as $dispo){
             if($dispo->getDebut() < $festival->getCreneau()->getDebut()
                 || $dispo->getFin() > $festival->getCreneau()->getFin()
-                || $dispo->getDebut() > date("Y-m-d H:i")
-                || $dispo->getFin() > date("Y-m-d H:i")){
+                || $dispo->getDebut() < date("Y-m-d H:i")
+                || $dispo->getFin() < date("Y-m-d H:i")){
                 $flashBag->add("error", "Les dates de disponibilités sont incorrecte");
                 return false;
             }

@@ -24,6 +24,8 @@ const addFormToCollection = () => {
             postes.dataset.index
         );
 
+    item.classList.add("poste");
+
     postes.appendChild(item);
 
     postes.dataset.index++;
@@ -36,4 +38,5 @@ const postes = document.querySelector('#postes')
 
 Array.from(document.querySelectorAll('.poste')).forEach(function (item) {
     addTagFormDeleteLink(item);
+    postes.dataset.index++;
 });

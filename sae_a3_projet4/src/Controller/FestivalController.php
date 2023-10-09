@@ -65,13 +65,13 @@ class FestivalController extends AbstractController
         $festival->addPoste((new Poste())->setNom("Tri")->setDescription("Conduire les charriots élévateurs + vider les contenants + répartir selon l’affectation des bennes"));
 
         $form = $this->createForm(FestivalType::class,$festival,[
-            'method'=>'POST',
-            'action'=>$this->generateUrl('demandeFestival')
+            'method' => 'POST',
+            'action' => $this->generateUrl('demandeFestival')
         ]);
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            if($festivalManager->verifierFestival($festival, $requestStack)){
+            if(!$festivalManager->verifierFestival($festival, $requestStack)){
                 return $this->redirectToRoute('festivalsAttente');
             }
             $entityManager->persist($festival);

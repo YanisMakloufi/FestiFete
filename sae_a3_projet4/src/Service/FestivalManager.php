@@ -34,10 +34,10 @@ class FestivalManager implements FestivalManagerInterface{
             return false;
         }
 
-        if($creneau->getDebut() > date("Y-m-d H:i")
-            || $creneau->getFin() > date("Y-m-d H:i")){
-            $flashBag->add("error", "Les dates d'ouverture et de fermeture sont incorrecte");
-            return false;
+        if($creneau->getDebut() < date("Y-m-d H:i")
+            || $creneau->getFin() < date("Y-m-d H:i")){
+                $flashBag->add("error", "Les dates d'ouverture et de fermeture sont incorrecte");
+                return false;
         }
 
         $flashBag->add("success", "Votre festival a bien été demandé");

@@ -20,7 +20,7 @@ class Poste
     private ?string $description = null;
 
     #[ORM\ManyToOne(targetEntity: Festival::class, inversedBy: 'postes')]
-    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
+    #[ORM\JoinColumn(onDelete: "CASCADE")]
     private ?Festival $festival;
 
     public function getId(): ?int

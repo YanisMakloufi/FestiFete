@@ -34,6 +34,7 @@ class FestivalType extends AbstractType
                 'label' => "Postes à pourvoir : ",
                 'allow_add' => true,
                 'allow_delete' => true,
+                'by_reference' => false,
                 'constraints' => [
                     new Assert\Count([
                         'min' => 1,
