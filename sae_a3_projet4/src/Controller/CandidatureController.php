@@ -8,8 +8,10 @@ use App\Form\CandidatureType;
 use App\Repository\FestivalRepository;
 use App\Repository\PosteRepository;
 use App\Repository\UtilisateurRepository;
+use App\Service\CandidatureManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,7 +19,7 @@ use Doctrine\ORM\EntityManagerInterface;
 class CandidatureController extends AbstractController
 {
     #[Route('/candidature/{idFestival}', name: 'candidature')]
-    public function index($idFestival, EntityManagerInterface $entityManager, Request $request, PosteRepository $posteRepository, FestivalRepository $festivalRepository, UtilisateurRepository $utilisateurRepository): Response
+    public function index($idFestival, EntityManagerInterface $entityManager, Request $request, PosteRepository $posteRepository, FestivalRepository $festivalRepository, UtilisateurRepository $utilisateurRepository, CandidatureManager $candidatureManager, RequestStack $requestStack): Response
     {
 
         $postes = $posteRepository->findBy(['festival' => $idFestival]);
@@ -32,22 +34,21 @@ class CandidatureController extends AbstractController
             $candidature->addPreference($t);
         }
 
-        $candidature->setUtilisateur($utilisateur);
-
         $form = $this->createForm(CandidatureType::class, $candidature, [
             'method' => 'POST',
             'action' => $this->generateURL('candidature', ['idFestival' => $idFestival])
         ]);
 
+        $candidature->setFestival($festival);
+        $candidature->setUtilisateur($utilisateur);
+
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            // À ce stade, le formulaire et ses données sont valides
-            // L'objet "Exemple" a été mis à jour avec les données, il ne reste plus qu'à le sauvegarder
-            $candidature->setFestival($festival);
-
+            if(!$candidatureManager->verifierCandidature($candidature, $requestStack)){
+                return $this->redirectToRoute('demandeFestival');
+            }
             $entityManager->persist($candidature);
             $entityManager->flush();
-
             //On redirige vers la page suivante
             return $this->redirectToRoute('candidature', ['idFestival' => $idFestival]);
         }

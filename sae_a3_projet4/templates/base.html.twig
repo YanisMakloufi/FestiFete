@@ -20,6 +20,17 @@
             </nav>
         </header>
 
+        <div id="flashes-container">
+            <!-- Pour chaque message du type "success" -->
+            {% for flashMsgSuccess in app.flashes("success") %}
+                <span class="flashes-success">{{ flashMsgSuccess }}</span>
+            {% endfor %}
+            <!-- Pour chaque message du type "error" -->
+            {% for flashMsgError in app.flashes("error") %}
+                <span class="flashes-error">{{ flashMsgError }}</span>
+            {% endfor %}
+        </div>
+
         <main>
             {% block body %}{% endblock %}
         </main>

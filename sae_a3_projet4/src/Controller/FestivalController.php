@@ -7,6 +7,7 @@ use App\Entity\Poste;
 use App\Form\CandidatureType;
 use App\Form\FestivalType;
 use App\Repository\FestivalRepository;
+use App\Service\FestivalManager;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,7 +20,7 @@ class FestivalController extends AbstractController
 {
 
     #[Route('/festivals/attente', name: 'festivalsAttente')]
-    public function index(FestivalRepository $festivalRepository, Request $request, EntityManagerInterface $entityManager): Response
+    public function index(FestivalRepository $festivalRepository): Response
     {
         $options = [
             'festivals' => $festivalRepository->findAllNonVerifie()
@@ -53,7 +54,7 @@ class FestivalController extends AbstractController
     }
 
     #[Route('/festivals/demande', name: 'demandeFestival')]
-    public function demandeFestival(Request $request,EntityManagerInterface $entityManager):Response
+    public function demandeFestival(Request $request,EntityManagerInterface $entityManager, FestivalManager $festivalManager, RequestStack $requestStack):Response
     {
         $festival = new Festival();
 
@@ -71,6 +72,9 @@ class FestivalController extends AbstractController
 
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
+            if($festivalManager->verifierFestival($festival, $requestStack)){
+                return $this->redirectToRoute('festivalsAttente');
+            }
             $entityManager->persist($festival);
             $entityManager->flush();
 

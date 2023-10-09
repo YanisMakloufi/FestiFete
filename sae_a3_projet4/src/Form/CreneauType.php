@@ -16,10 +16,12 @@ class CreneauType extends AbstractType
         $builder
             ->add('debut', DateTimeType::class, [
                 'label' => "Horaire de début",
-                'widget' => 'single_text'])
+                'widget' => 'single_text',
+                'attr'   => ['min' => (new \DateTime())->format('Y-m-d H:i')]])
             ->add('fin', DateTimeType::class, [
                 'label' => "Horaire de fin",
-                'widget' => 'single_text']);
+                'widget' => 'single_text',
+                'attr'   => ['min' => (new \DateTime())->format('Y-m-d H:i')]]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
