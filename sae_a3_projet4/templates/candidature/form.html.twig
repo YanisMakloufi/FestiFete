@@ -23,6 +23,7 @@
                 commodo maximus. Vestibulum nisi quam, volutpat sed vestibulum nec, interdum id nulla.-->
             </p>
         </section>
+        Ouvert du {{ festival.creneau.debut|date("d/m/Y")}} au {{ festival.creneau.fin|date("d/m/Y") }}
     </article>
 
     {{ form_start(formulaire, {'attr' : {'id' : 'formulaire', 'class' : 'Candidature'}}) }}

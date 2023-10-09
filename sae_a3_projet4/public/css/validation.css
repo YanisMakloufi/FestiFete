@@ -5,7 +5,7 @@ h1 {
 .festival{
     background-color: indianred;
     padding: 1%;
-    margin: 2%;
+    margin: 2% 10%;
 }
 
 .festival > header{
@@ -19,6 +19,17 @@ fieldset{
 
 .title{
     font-weight: bold;
+}
+
+.postes {
+    display: flex;
+    justify-content: space-between;
+}
+
+.postes > div {
+    width: 10%;
+    background-color: palevioletred;
+    padding: 1%;
 }
 
 p{
