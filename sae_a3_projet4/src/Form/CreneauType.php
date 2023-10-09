@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Creneau;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,8 +19,7 @@ class CreneauType extends AbstractType
                 'widget' => 'single_text'])
             ->add('fin', DateTimeType::class, [
                 'label' => "Horaire de fin",
-                'widget' => 'single_text'])
-        ;
+                'widget' => 'single_text']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

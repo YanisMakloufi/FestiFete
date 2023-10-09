@@ -21,24 +21,24 @@ class Candidature
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $descCandidature = null;
+    private ?string $description = null;
 
     //#[ORM\Column(length: 255)]
-    #[ORM\OneToMany(mappedBy: 'candidature', targetEntity: Preference::class, orphanRemoval: true, cascade: ["persist"])]
+    #[ORM\OneToMany(mappedBy: 'candidature', targetEntity: Preference::class, orphanRemoval: true)]
     private Collection $preferences;
 
     #[ORM\ManyToOne(inversedBy: 'candidatures')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private ?Utilisateur $utilisateur = null;
 
     #[ORM\ManyToOne(inversedBy: 'candidatures')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private ?Festival $festival = null;
 
-    #[JoinTable(name: 'Ouvert')]
+    #[JoinTable(name: 'Disponibilite')]
     #[JoinColumn(name: 'idCandidature', referencedColumnName: 'id')]
     #[InverseJoinColumn(name: 'idCreneau', referencedColumnName: 'id')]
-    #[ManyToMany(targetEntity: 'Creneau', cascade: ["persist"])]
+    #[ManyToMany(targetEntity: 'Creneau', orphanRemoval: true)]
     private Collection $disponibilites;
     public function __construct()
     {
@@ -52,14 +52,14 @@ class Candidature
         return $this->id;
     }
 
-    public function getDescCandidature(): ?string
+    public function getDescription(): ?string
     {
-        return $this->descCandidature;
+        return $this->description;
     }
 
-    public function setDescCandidature(string $descCandidature): static
+    public function setDescription(string $description): static
     {
-        $this->descCandidature = $descCandidature;
+        $this->description = $description;
 
         return $this;
     }

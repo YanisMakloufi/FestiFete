@@ -7,6 +7,12 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\InverseJoinColumn;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\OneToMany;
+use Doctrine\ORM\Mapping\OneToOne;
 
 #[ORM\Entity(repositoryClass: FestivalRepository::class)]
 class Festival
@@ -23,21 +29,20 @@ class Festival
     private ?string $description = null;
 
     #[ORM\Column]
-    private ?bool $validation = null;
+    private ?bool $validation = false;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $lieu = null;
 
-    //#[ORM\Column(type: Types::ARRAY)]
-    #[ORM\OneToMany(mappedBy: 'festival', targetEntity: Poste::class, orphanRemoval: true)]
+    #[OneToMany(mappedBy: 'festival', targetEntity: Poste::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $postes;
 
-    #[ORM\OneToMany(mappedBy: 'festival', targetEntity: Candidature::class, orphanRemoval: true)]
+    #[OneToMany(mappedBy: 'festival', targetEntity: Candidature::class, orphanRemoval: true)]
     private Collection $candidatures;
 
-    //#[ORM\OneToOne(cascade: ['persist', 'remove'])]
-    //#[ORM\JoinColumn(nullable: false)]
-    //private ?Creneau $creneau = null;
+    #[OneToOne(targetEntity: Creneau::class, cascade: ['persist'])]
+    #[JoinColumn(name: 'creneau_id', referencedColumnName: 'id')]
+    private ?Creneau $creneau = null;
 
     public function __construct()
     {
@@ -130,30 +135,6 @@ class Festival
         return $this;
     }
 
-    public function getDebut(): ?\DateTimeInterface
-    {
-        return $this->debut;
-    }
-
-    public function setDebut(\DateTimeInterface $debut): static
-    {
-        $this->debut = $debut;
-
-        return $this;
-    }
-
-    public function getFin(): ?\DateTimeInterface
-    {
-        return $this->fin;
-    }
-
-    public function setFin(\DateTimeInterface $fin): static
-    {
-        $this->fin = $fin;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Candidature>
      */
@@ -184,12 +165,12 @@ class Festival
         return $this;
     }
 
-    public function getCreneau(): ?\DateTimeInterface
+    public function getCreneau(): ?Creneau
     {
         return $this->creneau;
     }
 
-    public function setCreneau(\DateTimeInterface $creneau): static
+    public function setCreneau(?Creneau $creneau): static
     {
         $this->creneau = $creneau;
 

@@ -36,9 +36,9 @@ class Utilisateur implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $email = null;
 
     #[ORM\Column]
-    private ?bool $estAdministrateur = null;
+    private ?bool $estAdministrateur = false;
 
-    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Candidature::class, cascade: ["persist"], orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'utilisateur', targetEntity: Candidature::class, orphanRemoval: true)]
     private Collection $candidatures;
 
     public function __construct()

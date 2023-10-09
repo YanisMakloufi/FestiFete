@@ -8,5 +8,44 @@
 
 {% block body %}
     {{ form_start(formulaire, {'attr' : {'id' : 'formulaire', 'class' : 'Candidature'}}) }}
-    <h1>CREER VOTRE FESTIVAL</h1>
+    <h1>FESTIVAL</h1>
+
+    <section id="info">
+        <aside>
+            {{ form_label(formulaire.nom) }}
+            {{ form_widget(formulaire.nom, {'id': "nom"}) }}
+
+            {{ form_label(formulaire.description) }}
+            {{ form_widget(formulaire.description, {'id': "desc"}) }}
+
+            {{ form_label(formulaire.lieu) }}
+            {{ form_widget(formulaire.lieu, {'id': "lieu"}) }}
+        </aside>
+
+        <aside>
+            {{ form_label(formulaire.creneau) }}
+            {{ form_widget(formulaire.creneau, {'id': "creneau"}) }}
+        </aside>
+    </section>
+
+    <section>
+        {{ form_label(formulaire.postes) }}
+        <button type="button" class="add_item_link" data-collection-holder-class="postes">+</button>
+        <section id="postes"
+        data-index="{{ formulaire.postes|length > 0 ? formulaire.postes|last.vars.name + 1 : 0 }}"
+        data-prototype="{{ form_widget(formulaire.postes.vars.prototype)|e('html_attr') }}">
+            {% for poste in formulaire.postes %}
+                <fieldset class="poste">
+                    {{ form_widget(poste) }}
+                </fieldset>
+            {% endfor %}
+        </section>
+    </section>
+
+    {{ form_widget(formulaire.envoyer, {'id': "submit", 'label' : "Demande"}) }}
+
+    {{ form_rest(formulaire) }}
+    {{ form_end(formulaire) }}
+    <script defer type="text/javascript" src="{{ asset("js/creationPosteFestival.js") }}"></script>
 {% endblock %}
+

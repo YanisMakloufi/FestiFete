@@ -2,6 +2,15 @@ body{
     margin: 0;
 }
 
+h1 {
+    text-align: center;
+}
+
+body > header {
+    background-color: Gainsboro;
+    padding: 1%;
+}
+
 body > header > nav{
     width: 40%;
     margin: auto;
@@ -11,4 +20,9 @@ body > header > nav{
 body > header > nav > a{
     text-align: center;
     width: 33%;
+}
+
+body > footer {
+    background-color: Khaki;
+    padding: 1%;
 }

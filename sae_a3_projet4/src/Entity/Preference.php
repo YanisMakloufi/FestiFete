@@ -14,13 +14,15 @@ class Preference
     private ?int $id = null;
 
     #[ORM\ManyToOne(targetEntity: Candidature::class)]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private ?Candidature $candidature = null;
 
     #[ORM\ManyToOne(targetEntity: Poste::class)]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
     private ?Poste $poste = null;
 
+    #[ORM\Column]
+    private ?int $nbPreference = null;
 
     public function getCandidature(): Candidature
     {
@@ -34,8 +36,7 @@ class Preference
         return $this;
     }
 
-    #[ORM\Column]
-    private ?int $nbPreference = null;
+
 
     public function getId(): ?int
     {

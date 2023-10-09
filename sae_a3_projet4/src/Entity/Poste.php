@@ -19,8 +19,9 @@ class Poste
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $description = null;
 
-    #[ORM\ManyToOne(targetEntity: Festival::class)]
-    private $festival;
+    #[ORM\ManyToOne(targetEntity: Festival::class, inversedBy: 'postes')]
+    #[ORM\JoinColumn(nullable: false, onDelete: "CASCADE")]
+    private ?Festival $festival;
 
     public function getId(): ?int
     {
@@ -54,7 +55,7 @@ class Poste
     /**
      * @return mixed
      */
-    public function getFestival()
+    public function getFestival() : ?Festival
     {
         return $this->festival;
     }
@@ -62,7 +63,7 @@ class Poste
     /**
      * @param mixed $festival
      */
-    public function setFestival($festival): static
+    public function setFestival(?Festival $festival): static
     {
         $this->festival = $festival;
 

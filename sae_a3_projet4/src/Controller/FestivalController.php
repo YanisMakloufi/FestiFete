@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Festival;
+use App\Entity\Poste;
 use App\Form\CandidatureType;
 use App\Form\FestivalType;
 use App\Repository\FestivalRepository;
@@ -17,11 +18,10 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 class FestivalController extends AbstractController
 {
 
-    #[Route('/festivals/attente', name: 'festivals_en_attente')]
+    #[Route('/festivals/attente', name: 'festivalsAttente')]
     public function index(FestivalRepository $festivalRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $options = [
-            'controller_name' => 'FestivalController',
             'festivals' => $festivalRepository->findAllNonVerifie()
         ];
 
@@ -52,13 +52,21 @@ class FestivalController extends AbstractController
         return new JsonResponse(null, '204');
     }
 
-    #[Route('/festival/creation', name: 'Creation d un festival')]
-    public function creerFestival(Request $request,EntityManager $entityManager):Response
+    #[Route('/festivals/demande', name: 'demandeFestival')]
+    public function demandeFestival(Request $request,EntityManagerInterface $entityManager):Response
     {
         $festival = new Festival();
+
+        $festival->addPoste((new Poste())->setNom("Billetterie")->setDescription("Gérer la monnaie liquide et CB + tenir un inventaire des souches de billets"));
+        $festival->addPoste((new Poste())->setNom("Cuisines")->setDescription("Cuisiner selon les menus établis + servir en buffet + dresser et ranger la salle + faire la vaisselle"));
+        $festival->addPoste((new Poste())->setNom("Loges")->setDescription("Accueillir les groupes + véhiculer les groupes + répondre aux sollicitations particulières"));
+        $festival->addPoste((new Poste())->setNom("Parking")->setDescription("Orienter la circulation selon les plans + faire stationner correctement les véhicules pour les accès"));
+        $festival->addPoste((new Poste())->setNom("Sandwicherie")->setDescription("Préparer et servir les sandwichs et cornets de frites + encaisser les consos "));
+        $festival->addPoste((new Poste())->setNom("Tri")->setDescription("Conduire les charriots élévateurs + vider les contenants + répartir selon l’affectation des bennes"));
+
         $form = $this->createForm(FestivalType::class,$festival,[
             'method'=>'POST',
-            'action'=>$this->generateUrl('festivals_en_attente')
+            'action'=>$this->generateUrl('demandeFestival')
         ]);
 
         $form->handleRequest($request);
@@ -66,10 +74,9 @@ class FestivalController extends AbstractController
             $entityManager->persist($festival);
             $entityManager->flush();
 
-            return $this->redirectToRoute('festival_en_attente');
+            return $this->redirectToRoute('festivalsAttente');
         }
         return $this->render('festival/form.html.twig', [
-            'controller_name' => 'FestivalController',
             'formulaire' => $form]);
     }
 }

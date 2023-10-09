@@ -28,13 +28,13 @@ form{
 }
 
 #info-festival > section {
-    background-color: cornflowerblue;
+    background-color: palevioletred;
     padding: 1%;
     margin: 0 2%;
 }
 
 #profil {
-    background-color: lightgoldenrodyellow;
+    background-color: LightBlue;
     padding: 1%;
     margin: 2% 0;
 }
@@ -47,6 +47,9 @@ form{
 #creneau fieldset{
     display: flex;
     flex-direction: column;
+    background-color: steelblue;
+    border: none;
+    padding: 1%;
 }
 
 #creneau section{
@@ -57,7 +60,7 @@ form{
 #poste {
     display: flex;
     justify-content: space-between;
-    background-color: darkseagreen;
+    background-color: MediumAquamarine;
     margin: 3% 0;
     padding: 1%;
     align-items: stretch;
@@ -66,7 +69,8 @@ form{
 #candidature aside{
     padding: 1%;
     width: 45%;
-    background-color: darkviolet;
+    background-color: MediumSlateBlue;
+    min-height: 200px;
 }
 
 #candidature section input {
@@ -86,7 +90,7 @@ form{
     justify-content: space-between;
     margin: 3%;
     padding: 1%;
-    background-color: violet;
+    background-color: HoneyDew;
 }
 
 .poste legend {

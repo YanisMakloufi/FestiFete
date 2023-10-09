@@ -53,7 +53,6 @@ class CandidatureController extends AbstractController
         }
 
         return $this->render('candidature/form.html.twig', [
-            'controller_name' => 'CandidatureController',
             'formulaire' => $form,
             'festival' => $festival]);
     }

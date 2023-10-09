@@ -16,7 +16,7 @@ class CandidatureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('descCandidature', TextareaType::class, [
+            ->add('description', TextareaType::class, [
                 'attr' => [
                     'minlength' => 50,
                     'maxlength' => 600
@@ -36,7 +36,6 @@ class CandidatureType extends AbstractType
                     new Assert\Count([
                         'min' => 1,
                         'minMessage' => 'Must have at least one value',
-                        // also has max and maxMessage just like the Length constraint
                     ]),
             ]])
             ->add('envoyer', SubmitType::class);
