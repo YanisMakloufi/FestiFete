@@ -23,7 +23,7 @@ class Candidature
     private ?string $description = null;
 
     //#[ORM\Column(length: 255)]
-    #[ORM\OneToMany(mappedBy: 'candidature', targetEntity: Preference::class, orphanRemoval: true)]
+    #[ORM\OneToMany(mappedBy: 'candidature', targetEntity: Preference::class, orphanRemoval: true, cascade: ['persist'])]
     private Collection $preferences;
 
     #[ORM\ManyToOne(inversedBy: 'candidatures')]
