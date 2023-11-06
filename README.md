@@ -1,5 +1,6 @@
-# SAE-A3
-Projet universitaire de 3e année BUT Informatique option RACDV (Réalisation d'Application : Conception, Développement, Validation)
+# FestiFete
+Initialement un projet universitaire de 3e année BUT Informatique, le projet n'ayant pas aboutit à cause du manque d'effectif dans le groupe, j'ai décidé de le continuer pendant mon temps libre.
+
 
 ## Technologies utilisées :
 - PHP v8.1.10
@@ -8,4 +9,4 @@ Projet universitaire de 3e année BUT Informatique option RACDV (Réalisation d'
 ## Équipe :
 - Yanis Makloufi
 
-Consignes : https://docs.google.com/document/d/1_pLCxkPcHuDFvGg2g79_gRkcHjrzeYp45pEioBynrfM/edit (Projet 4)
+Consignes de référence: https://docs.google.com/document/d/1_pLCxkPcHuDFvGg2g79_gRkcHjrzeYp45pEioBynrfM/edit (Projet 4)
